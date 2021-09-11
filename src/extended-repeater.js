@@ -18,23 +18,24 @@ import { NotImplementedError } from '../extensions/index.js';
 export default function repeater(str, options) {
   str = str +''
   let string = ""
-  if (!options.repeatTimes) {
-  return string =  str + addition()
-  }
+
+        if (!options.repeatTimes) {
+          return string =  str + addition()
+        }
        
-         if (!options.separator && options.repeatTimes){
+        if (!options.separator && options.repeatTimes){
          string = (str + separator()).repeat(options.repeatTimes)
-      
-         }
-       
-       if (options.separator && options.repeatTimes && !options.addition){
+        }
+
+        if (options.separator && options.repeatTimes && !options.addition){
         let strAndSeparator = str + separator()
         string = strAndSeparator.repeat(options.repeatTimes)
-        
-       }
+      }
     
-      if (options.separator && options.repeatTimes && options.addition) {
-        
+      
+
+      if (options.separator && options.repeatTimes && options.addition || String(options.addition) === 'false' || String(options.addition) === 'null') {
+        options.addition = options.addition + '' 
         let strAndAddition = str + addition() + separator()
          string = strAndAddition.repeat(options.repeatTimes)
    
