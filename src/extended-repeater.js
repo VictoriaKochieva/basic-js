@@ -15,7 +15,62 @@ import { NotImplementedError } from '../extensions/index.js';
  * => 'STRINGPLUS00PLUS00PLUS**STRINGPLUS00PLUS00PLUS**STRINGPLUS00PLUS00PLUS'
  *
  */
-export default function repeater(/* str, options */) {
-  throw new NotImplementedError('Not implemented');
-  // remove line with error and write your code here
-}
+export default function repeater(str, options) {
+  str = str +''
+  let string = ""
+  if (!options.repeatTimes) {
+  return string =  str + addition()
+  }
+       
+         if (!options.separator && options.repeatTimes){
+         string = (str + separator()).repeat(options.repeatTimes)
+      
+         }
+       
+       if (options.separator && options.repeatTimes && !options.addition){
+        let strAndSeparator = str + separator()
+        string = strAndSeparator.repeat(options.repeatTimes)
+        
+       }
+    
+      if (options.separator && options.repeatTimes && options.addition) {
+        
+        let strAndAddition = str + addition() + separator()
+         string = strAndAddition.repeat(options.repeatTimes)
+   
+       }
+    
+    return string.slice(0, -options.separator.length)
+    
+  function separator() {
+    if (options.separator) {
+      return options.separator
+    } else {
+      return options.separator = '+'
+    }
+   }
+    
+    function addition() {
+      options.addition + ''
+      if (!options.addition) {
+        return options.addition = ''
+      }
+      if (options.addition && !options.additionRepeatTimes) {      
+        return options.addition
+      } else if (options.addition && options.additionRepeatTimes && !options.additionSeparator){
+        if (options.additionRepeatTimes > 1) {
+        let additionAndSeparator = options.addition + '|'
+        let additionRepeated = additionAndSeparator.repeat(options.additionRepeatTime)
+        return additionRepeated 
+        } else {
+         let additionRepeated = options.addition.repeat(options.additionRepeatTimes)
+        return additionRepeated 
+        }
+        
+      } else if (options.addition && options.additionRepeatTimes && options.additionSeparator) {
+        let additionAndSeparator = options.addition + options.additionSeparator
+        let additionRepeated = additionAndSeparator.repeat(options.additionRepeatTimes)
+        return additionRepeated
+      }
+    }
+  }
