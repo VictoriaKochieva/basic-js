@@ -58,10 +58,12 @@ export default function repeater(str, options) {
       if (options.addition && !options.additionRepeatTimes) {      
         return options.addition
       } else if (options.addition && options.additionRepeatTimes && !options.additionSeparator){
+        
         if (options.additionRepeatTimes > 1) {
-        let additionAndSeparator = options.addition + '|'
-        let additionRepeated = additionAndSeparator.repeat(options.additionRepeatTime)
-        return additionRepeated 
+          options.additionSeparator = '|'
+        let additionAndSeparator = options.addition + options.additionSeparator
+        let additionRepeated = additionAndSeparator.repeat(options.additionRepeatTimes)
+        return additionRepeated.slice(0, -options.additionSeparator.length)
         } else {
          let additionRepeated = options.addition.repeat(options.additionRepeatTimes)
         return additionRepeated 
@@ -70,7 +72,7 @@ export default function repeater(str, options) {
       } else if (options.addition && options.additionRepeatTimes && options.additionSeparator) {
         let additionAndSeparator = options.addition + options.additionSeparator
         let additionRepeated = additionAndSeparator.repeat(options.additionRepeatTimes)
-        return additionRepeated
+        return additionRepeated.slice(0, -options.additionSeparator.length)
       }
     }
   }
