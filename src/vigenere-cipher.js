@@ -53,10 +53,6 @@ export default class VigenereCipheringMachine {
     if (!message || !key) {
       throw new Error ('Incorrect arguments!')
     }
-   
-    if (!message || !key) {
-      throw new Error ('Incorrect arguments!')
-    }
 
     while (key.length < message.length) {
       key+= key
