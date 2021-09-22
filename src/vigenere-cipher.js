@@ -112,7 +112,9 @@ export default class VigenereCipheringMachine {
   }
   
   decrypt(message, key) {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+  
+    if (!message || !key) {
+      throw new Error ('Incorrect arguments!')
+    }
   }
 }
