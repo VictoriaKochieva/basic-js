@@ -66,13 +66,13 @@ export default class VigenereCipheringMachine {
      newKey = key
    }
      console.log('mes: ' + message,message.length, 'key: ' + newKey, newKey.length)
-     message = message.split(" ").join("|")
+     message = message.split(" ").join("+")
      
      let cipher = []
   
   for (let i = 0, j = 0; i < message.length, j < newKey.length; i++, j++) {
     
-    if (message[i] !== "|") {
+    if (message[i] !== "+") {
       if (!RegExp(/[a-z]/,"gi").test(message[i])){
         cipher.push(message[i])
       }
@@ -114,6 +114,7 @@ export default class VigenereCipheringMachine {
     }
 
     let deCipher = []
+
     while (key.length < message.length) {
       key+= key
     } 
@@ -125,27 +126,19 @@ export default class VigenereCipheringMachine {
    } else {
      newKey = key
    }
-     message = message.split(" ").join("/")
-  console.log(message, newKey)
-  
+     message = message.split(" ").join("+")  
   
   for (let i = 0, j =0; i < message.length, j < newKey.length; i++, j++){
-
-    if (message[i] === "/") {
-      deCipher.push(" ")      
-      j--
-      continue
-    }
     
     if (!message[i]) {
       break
     }
     
-    if (!RegExp(/[a-z]/,"gi").test(message[i]) && message[i] !== "|") {
+    if (!RegExp(/[a-z]/,"gi").test(message[i]) && message[i] !== "+") {
       deCipher.push(message[i])      
     }
     
-    else {
+    else if (message[i] !== "+") {
       if (table[0].indexOf(message[i].toUpperCase()) < table[0].indexOf(newKey[j].toUpperCase())){
       let deCode = 26 + table[0].indexOf(message[i].toUpperCase()) - table[0].indexOf(newKey[j].toUpperCase())
       deCipher.push(table[0][deCode])
@@ -153,7 +146,11 @@ export default class VigenereCipheringMachine {
       let deCode = table[0].indexOf(message[i].toUpperCase()) - table[0].indexOf(newKey[j].toUpperCase()) 
       deCipher.push(table[0][deCode])     
      }
-    }   
+    }  else {
+        deCipher.push(" ")      
+        j--
+    }
+   
   
   }   return deCipher.join("")
   }
