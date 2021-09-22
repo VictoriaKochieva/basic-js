@@ -112,5 +112,49 @@ export default class VigenereCipheringMachine {
     if (!message || !key) {
       throw new Error ('Incorrect arguments!')
     }
+
+    let deCipher = []
+    while (key.length < message.length) {
+      key+= key
+    } 
+   
+   let newKey
+
+   if (key.length > message.length) {
+     newKey = key.slice(0, message.length)
+   } else {
+     newKey = key
+   }
+     message = message.split(" ").join("/")
+  console.log(message, newKey)
+  
+  
+  for (let i = 0, j =0; i < message.length, j < newKey.length; i++, j++){
+
+    if (message[i] === "/") {
+      deCipher.push(" ")      
+      j--
+      continue
+    }
+    
+    if (!message[i]) {
+      break
+    }
+    
+    if (!RegExp(/[a-z]/,"gi").test(message[i]) && message[i] !== "|") {
+      deCipher.push(message[i])      
+    }
+    
+    else {
+      if (table[0].indexOf(message[i].toUpperCase()) < table[0].indexOf(newKey[j].toUpperCase())){
+      let deCode = 26 + table[0].indexOf(message[i].toUpperCase()) - table[0].indexOf(newKey[j].toUpperCase())
+      deCipher.push(table[0][deCode])
+    } else {
+      let deCode = table[0].indexOf(message[i].toUpperCase()) - table[0].indexOf(newKey[j].toUpperCase()) 
+      deCipher.push(table[0][deCode])     
+     }
+    }   
+  
+  }   return deCipher.join("")
   }
 }
