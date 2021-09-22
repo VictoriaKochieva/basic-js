@@ -16,13 +16,13 @@ export default function getSeason(date) {
     return 'Unable to determine the time of year!'
   }
 
-  
-  if (Object.prototype.toString.call(date) === '[object Date]') {  
+  try {
+    date.getTime()
+  } catch (error) {
+    throw new Error('Invalid date!')
+  }
 
-    if (isNaN (date.getTime ())) {
-      throw new Error ('Invalid date!')
-    } else {
-
+  if (Object.prototype.toString.call(date) === '[object Date]') {
   let month = date.getMonth()
 
   switch(month) {
@@ -35,13 +35,11 @@ export default function getSeason(date) {
     case 3:
     case 4: 
      return 'spring'
- 
 
     case 5:
     case 6:
     case 7: 
      return 'summer'
-  
 
     case 8:
     case 9:
@@ -49,10 +47,5 @@ export default function getSeason(date) {
      return 'autumn'
    
   }
-}
-
-}
-else {
-  throw new Error ('Invalid date!')
 }
 }
